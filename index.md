@@ -7,4 +7,4 @@ If you are reading this page, we assume that you will learn _Data Structures and
 Through a series of guides and pratices, we hope to prepare you for the course. 
 
 [C++](./CPlusPlus/index.md)
-
+[Math](./Math/index.md)
