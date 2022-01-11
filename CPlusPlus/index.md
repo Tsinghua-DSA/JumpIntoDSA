@@ -1,9 +1,11 @@
 # 21天入门C++ 
 ## _21 days to learn the ABCs of C++_
 
-本课程的的编程作业需使用C++完成, 本课程的示例代码都使用C++编写。因此，入门基本的C++语法特性，对学习本课程是有必要的。
+本课程的的编程作业需使用C++完成, 本课程的示例代码都使用C++编写。因此，入门基本的C++语法特性，对学习本课程是有必要的。我们假定至少学习过一门C语言/C++语言的程序设计类课程。
 
 You need to finish the Programming Assignments in C++. All of our example codes will be in C++. Thus it's necessary for you to be familiar with the ABCs of C++ if you want to learn DSA.
+
+We assume that you have finished at least one course on C/C++ programming.
 
 我们第一轮计划介绍下面这些C++语法特性：
 We will introduce the following C++ features:
