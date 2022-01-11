@@ -10,9 +10,10 @@ We assume that you have finished at least one course on C/C++ programming.
 我们第一轮计划介绍下面这些C++语法特性：
 We will introduce the following C++ features:
 
-- 类和对象 classes and objects
-- 构造函数和析构函数 constructors and destructors
-- 继承 多态 虚函数 inheritance, polymorphysim, virtual functions
+- [类和对象 classes and objects](./Class&Object.md)
+- [构造函数和析构函数 constructors and destructors](Cons&Dest.md)
+- [继承 inheritance](Inheritance.md)
+- 多态 虚函数 , polymorphysim, virtual functions
 - 运算符重载   overloading operators
 - 简单的模板 basics of templates 
 - C++内存分配  memory allocation in C++
