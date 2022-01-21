@@ -37,7 +37,8 @@ This is our first try, and we treasure your opinions.
 升级版: 通过运算符重载支持上述操作。
 挑战版：支持分子分母是超出long long范围的数字（可搜索"大整数运算、高精度”等等）
 
-作业2：实现一个矩阵类。实现一些你在线性代数里学到过的操作。
+作业2：实现一个矩阵类,矩阵里的每个元素是你在作业1里实现的分数类型。然后尝试实现一些你在线性代数里学到过的操作，比如矩阵乘法。
 
-作业3: 阅读The C++ Programming Language(4th edition)的 Chapter 16 Classes, 跟着实现其中的Date类。尝试将Date类的实现放在date.h/date.cpp文件里, 然后在main.cpp里include这些文件，在main函数里编写一些用来测试Date类的用例。
+作业3: 用模板实现作业2中的矩阵类，矩阵里的元素类型是模板参数T。
+
 
