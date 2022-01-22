@@ -12,6 +12,12 @@
 
 挑战版：支持分子分母是超出long long范围的数字（可搜索"大整数运算、高精度”等等）
 
+可在 [DSA自测课堂](https://dsa.cs.tsinghua.edu.cn/oj/course.shtml?courseid=167) 中 JumpIntoDSA 里面的 Fraction题目来测试你的有理数类。
+
+提示: 对于挑战版，你可以考虑实现一个“大整数类”
+
+提示：可以看看[python的有理数类的文档](https://docs.python.org/3/library/fractions.html), 尝试实现里面的一些接口，也可以在自己电脑上安装python，尝试用一用python里面的有理数类。
+
 作业2：实现一个矩阵类,矩阵里的每个元素是你在作业1里实现的分数类型。然后尝试实现一些你在线性代数里学到过的操作，比如矩阵乘法。
 
 作业3: 用模板实现作业2中的矩阵类，矩阵里的元素类型是模板参数T。
