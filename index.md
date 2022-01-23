@@ -8,3 +8,9 @@ Through a series of guides and pratices, we hope to prepare you for the course.
 
 [C++](./CPlusPlus/index.md)
 [Math](./Math/index.md)
+
+
+
+可在[邓老师的网站](https://dsa.cs.tsinghua.edu.cn/~deng/ds/dsacpp/index.htm) 和 网络学堂 获取更多学习资料。
+
+在[学堂在线](https://www.xuetangx.com)搜索“数据结构”可以免费学习邓老师制作的慕课。
