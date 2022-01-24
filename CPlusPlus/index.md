@@ -45,7 +45,7 @@ We will introduce the following C++ features:
 - [继承 inheritance](Inheritance.md)
 - [多态 polymorphysim](Polymorphism.md)
 - [运算符重载   overloading operators](Overloading.md)
-- 简单的模板 basics of templates 
+- [简单的模板 basics of templates](Templates.md)
 - C++内存分配  memory allocation in C++
 - 引用  referece
 
