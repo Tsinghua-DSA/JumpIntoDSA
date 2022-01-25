@@ -14,9 +14,13 @@
 
 可在 [DSA自测课堂](https://dsa.cs.tsinghua.edu.cn/oj/course.shtml?courseid=167) 中 JumpIntoDSA 里面的 Fraction题目来测试你的有理数类。
 
-提示: 对于挑战版，你可以考虑实现一个“大整数类”
+- 提示1: 在约分时, 可以考虑"辗转相除法" 或"辗转相减, 有2除2"的方法
 
-提示：可以看看[python的有理数类的文档](https://docs.python.org/3/library/fractions.html), 尝试实现里面的一些接口，也可以在自己电脑上安装python，尝试用一用python里面的有理数类。
+- 提示2: 对于挑战版，你可以考虑实现一个“大整数类”
+
+- 提示3：可以看看[python的有理数类的文档](https://docs.python.org/3/library/fractions.html), 尝试实现里面的一些接口，也可以在自己电脑上安装python，尝试用一用python里面的有理数类。
+
+
 
 作业2：实现一个矩阵类,矩阵里的每个元素是你在作业1里实现的分数类型。然后尝试实现一些你在线性代数里学到过的操作，比如矩阵乘法。
 
