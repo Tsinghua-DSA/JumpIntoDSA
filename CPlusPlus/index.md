@@ -46,8 +46,8 @@ We will introduce the following C++ features:
 - [多态 polymorphysim](Polymorphism.md)
 - [运算符重载   overloading operators](Overloading.md)
 - [简单的模板 basics of templates](Templates.md)
-- C++内存分配  memory allocation in C++
-- 引用  referece
+- [C++内存分配  memory allocation in C++](Memory.md)
+- [引用  referece](Reference.md)
 
 2022年是我们第一次做这样的尝试，希望同学们多多反馈。
 
