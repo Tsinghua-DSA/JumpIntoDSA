@@ -1,0 +1,6 @@
+site_name: JumpIntoDSA
+
+theme:
+  name: material
+  palette:
+    primary: deep purple
