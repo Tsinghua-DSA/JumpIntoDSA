@@ -22,3 +22,8 @@ nav:
     - 引用: C++/Reference.md
   - LAB0: LAB0/index.md
   - 数学基础: Math/index.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
