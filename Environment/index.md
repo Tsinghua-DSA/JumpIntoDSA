@@ -23,7 +23,11 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 
 这些配置会较多使用VS Code中的C++开发辅助功能。也完全可以不使用这些功能，纯粹使用命令行来完成编译运行调试等功能。
 
-{% include callout.html content="This is my callout. It has a border on the left whose color you define by passing a type parameter. I typically use this style of callout when I have more information that I want to share, often spanning multiple paragraphs. " type="primary" %} 
+> ##### WARNING
+>
+> Be sure that you're familiar with things like async/await and object destructuring
+> before continuing, as we'll be making use of features like these.
+{: .block-warning }
 
 # 安装WSL2
 
