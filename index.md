@@ -6,6 +6,8 @@ If you are reading this page, we assume that you will learn _Data Structures and
 
 Through a series of guides and pratices, we hope to prepare you for the course. 
 
+[开发环境/Environment](./Environment/index.md)
+[LAB0](./LAB0/index.md)
 [C++](./CPlusPlus/index.md)
 [Math](./Math/index.md)
 
