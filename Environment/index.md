@@ -14,7 +14,7 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 
 # 安装 VS Code
 
-通过[VS Code 官网]（https://code.visualstudio.com/) 下载安装即可。
+通过[VS Code 官网](https://code.visualstudio.com/) 下载安装即可。
 
 关于VS Code C++开发的配置，
 - linux可参考: https://code.visualstudio.com/docs/cpp/config-linux
@@ -22,12 +22,12 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 - Mac OS 可参考: https://code.visualstudio.com/docs/cpp/config-clang-mac 
 
 这些配置会较多使用VS Code中的C++开发辅助功能。也完全可以不使用这些功能，纯粹使用命令行来完成编译运行调试等功能。
-<Warning>
-this is a warn.
-</Warning>
+
+{% include callout.html content="This is my callout. It has a border on the left whose color you define by passing a type parameter. I typically use this style of callout when I have more information that I want to share, often spanning multiple paragraphs. " type="primary" %} 
+
 # 安装WSL2
 
-
+参考微软WSL2文档: https://docs.microsoft.com/en-us/windows/wsl/install 
 
 
 # VS Code 快速上手指南
