@@ -41,8 +41,7 @@ We assume that you have finished at least one course on C/C++ programming.
 
 这本书的[练习题](https://www.stroustrup.com/4thExercises.pdf)可在stroustrup的网站上下载，也是很好的学习资料。
 
-我们第一轮计划介绍下面这些C++语法特性：
-We will introduce the following C++ features:
+我们简介了这些C++语法特性：
 
 - [类和对象 classes and objects](./Class&Object.md)
 - [构造函数和析构函数 constructors and destructors](Cons&Dest.md)
@@ -53,11 +52,8 @@ We will introduce the following C++ features:
 - [C++内存分配  memory allocation in C++](Memory.md)
 - [引用  referece](Reference.md)
 
-2022年是我们第一次做这样的尝试，希望同学们多多反馈。
-
-This is our first try, and we treasure your opinions.
 
 
+另外你也可以去看一个清华大学学生算法协会的暑期培训视频, 快速梳理了C++的重要语法:
 
-
-
+https://www.bilibili.com/video/BV15d4y1U7HH

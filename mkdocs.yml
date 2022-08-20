@@ -9,7 +9,7 @@ theme:
     - navigation.indexes
 
 nav: 
-  - 环境搭建: Environment
+  - 环境搭建: Environment/index.md
   - C++快速入门: 
     - C++/index.md
     - 类和对象: C++/Class&Object.md
@@ -20,5 +20,5 @@ nav:
     - 模板简介: C++/Templates.md
     - 内存分配: C++/Memory.md
     - 引用: C++/Reference.md
-  - LAB0: LAB0
-  - 数学基础: Math
+  - LAB0: LAB0/index.md
+  - 数学基础: Math/index.md
