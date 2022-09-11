@@ -48,6 +48,14 @@ VS Code需要打开一个当前工作目录来进行开发。在Windows里，建
 
 利用好搜索引擎和VS Code的帮助文档即可。
 
+在Windows中, `Ctrl + Shift + P`呼出命令面板, 然后输入`remote-wsl`, 就会蹦出很多和wsl相关的候选命令。可以通过`New WSL Window` 打开一个运行在WSL上的VS Code窗口。
+
+打开一个工作目录(你的代码所在的文件夹), 一般是在菜单栏的`File`中选择`Open Folder`。
+
+点击VS Code最左侧的一列大按钮中最上面的一个, 会打开资源管理视图, 看到当前工作目录下的文件树。可以直接在这里右键菜单新建文件、选中打开文件等。
+
+在菜单栏`Terminal`中选择`New Terminal`就可以在当前工作目录下打开一个新的终端, 在里面用g++进行编译。
+
 ## bash快速上手指南
 
 WSL、linux、Mac OS的命令行都支持bash操作。
@@ -60,3 +68,12 @@ WSL、linux、Mac OS的命令行都支持bash操作。
 
 使用 [计算机系学生科协技能引导文档](https://docs.net9.org/basic/linux/#shell-101) 来快速上手shell的使用（wsl/linux/Mac OS的shell语法基本上是通用的，除了通过命令行安装软件的方法需要你通过搜索引擎解决一下）
 
+## 算法演示
+
+我们的一些算法演示基于 `java applet` 构建, 需要安装较早版本的Java SE(推荐为Java SE8)
+
+建议从Oracle官方的旧版本存档链接下载适合你操作系统的版本: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html 
+
+如果你使用的是ARM芯片的Mac电脑，可以下载其中适合于x86 MAC电脑的版本，可以正常运行。
+
+也可以考虑使用 https://www.cs.usfca.edu/~galles/visualization/Algorithms.html 之类基于javascript的演示。
