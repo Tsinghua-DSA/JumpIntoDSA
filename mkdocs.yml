@@ -11,6 +11,10 @@ theme:
 
 nav: 
   - 环境搭建: Environment/index.md
+  - C语言专题讲解: 
+    - C/index.md
+    - C/recursion.md
+    - C/pointer.md
   - C++快速入门: 
     - C++/index.md
     - 类和对象: C++/Class&Object.md
