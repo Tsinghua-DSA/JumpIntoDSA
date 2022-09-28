@@ -27,6 +27,7 @@ nav:
     - 引用: C++/Reference.md
   - LAB0: LAB0/index.md
   - 数学基础: Math/index.md
+  - 练习题目: Practice/index.md
 
 markdown_extensions:
   - admonition
