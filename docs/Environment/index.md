@@ -34,6 +34,18 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 
 然后安装 VS Code的 Remote - WSL扩展。
 
+这是一个相当常见的环境配置步骤，你可以尝试在一些视频网站(bilibili等）选择合适的关键词，搜索视频教程。
+
+!!! question "WSL 是什么?"
+
+    在本课程中，可以这样理解：是一种在windows操作系统的电脑上，安装linux双系统/虚拟机的便捷途径。
+    
+    安装WSL的时候，Windows操作系统会将自己的一部分磁盘划分给WSL，在里面安装一个Linux操作系统。随后我们就可以在Windows里打开这个Linux操作系统，对于用户来说，这就相当于你有了两台电脑，一台安装了Windows，一台安装了Linux，虽然你只使用了一台电脑的硬件。
+
+!!! question "Remote - WSL 是什么?"
+
+    Remote-WSL的逻辑和Remote-SSH相同。Remote-SSH的工作方式是，通过ssh网络协议远程连接到另一台电脑上，然后你在本地的机器上使用VS Code编程，就好像直接在远程的另一台电脑上工作一样。而Remote-WSL的工作方式很类似，也是打开了WSL的Linux操作系统（“虚拟机”）之后，使用VS Code 编程，就好像你直接在一台Linux操作系统的机器上使用VS Code编程一样。
+
 ## VS Code快速上手指南
 
 VS Code需要打开一个当前工作目录来进行开发。在Windows里，建议在WSL的`/home`目录下建立工作目录。
