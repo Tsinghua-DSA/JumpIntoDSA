@@ -10,7 +10,9 @@ theme:
     - content.code.annotate
 
 nav: 
-  - 环境搭建: Environment/index.md
+  - 环境搭建: 
+    - Environment/index.md
+    - Environment/wsl_error.md
   - C语言专题讲解: 
     - C/index.md
     - C/recursion.md
