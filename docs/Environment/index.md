@@ -83,6 +83,19 @@ WSL、linux、Mac OS的命令行都支持bash操作。
 
 使用 [计算机系学生科协技能引导文档](https://docs.net9.org/basic/linux/#shell-101) 来快速上手shell的使用（wsl/linux/Mac OS的shell语法基本上是通用的，除了通过命令行安装软件的方法需要你通过搜索引擎解决一下）
 
+!!! question "如何通俗理解bash和shell？他们究竟是什么东西，起什么作用呢？"
+
+    bash和shell属于“命令行界面”（command-line interface），这是相对于我们使用的“图形用户界面”（graphic user interface)而言。
+    
+    图形用户界面中，我们用鼠标点击图标、选择菜单中的选项来要求执行某一项操作，而在命令行界面中，我们像写代码一样，按照语法（bash语法）来编写一些命令，请求操作系统执行某一项操作。
+
+    例如，在图形用户界面中，我们打开一个文件夹folder1，右键点击一个文件FileA的图标，然后点击“删除”选项，就请求操作系统删除FileA这个文件。
+
+    而在“命令行界面”（shell）中，我们将当前路径调整到folder1（“当前路径”相当于图形界面中“当前打开的文件夹”），然后在窗口中输入“rm FileA”，就请求操作系统删除FileA这个文件。
+
+    更多的用法可以自由探索。
+
+
 ## 算法演示
 
 我们的一些算法演示基于 `java applet` 构建, 需要安装较早版本的Java SE(推荐为Java SE8)
