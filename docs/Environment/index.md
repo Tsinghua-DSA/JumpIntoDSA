@@ -32,7 +32,7 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 
 参考 [微软WSL2文档](https://docs.microsoft.com/zh-cn/windows/wsl/install)
 
-然后安装 VS Code的 Remote - WSL扩展。
+然后安装 VS Code的 `WSL` 扩展, 用`Remote - WSL`的方式进行开发。
 
 这是一个相当常见的环境配置步骤，你可以尝试在一些视频网站(bilibili等）选择合适的关键词，搜索视频教程。
 
