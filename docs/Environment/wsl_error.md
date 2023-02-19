@@ -18,6 +18,14 @@ https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
 
 ## 2 WSL 安装成功，在启动WSL后遇到的问题
 
+### 2.0 怎样从WSL命令行打开和修改文件
+
+很多时候我们希望从WSL命令行直接打开并修改一个文件，常见方法是用文本编辑器`nano`来完成。
+
+例如在WSL里输入命令`nano /etc/resolv.conf`就用文本编辑器打开了`/etc/resolv.conf`这个文件，然后可以修改其中的内容。
+
+通过`Ctrl+O`保存文件（需要回车确认），通过`Ctrl+X`退出文本编辑器。
+
 ### 2.1 DNS解析错误
 
 **表现**: 
@@ -33,6 +41,8 @@ WSL的已知问题，有些情况下DNS配置错误，导致无法从网站的�
 https://www.cnblogs.com/liujiaxin2018/p/16200315.html
 
 https://github.com/microsoft/WSL/issues/5256 
+
+注意需要修改`/etc/resolv.conf`而不`/etc/resolve.conf`
 
 ### 2.2 代理配置错误
 
