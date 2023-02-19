@@ -33,3 +33,21 @@ WSL的已知问题，有些情况下DNS配置错误，导致无法从网站的�
 https://www.cnblogs.com/liujiaxin2018/p/16200315.html
 
 https://github.com/microsoft/WSL/issues/5256 
+
+### 2.2 代理配置错误
+
+**表现**
+
+报错信息 `参考的对象类型不支持尝试的操作`  `Error code: Wsl/Service/0x8007273d`
+
+**原因**
+
+某些网络代理软件与WSL发生冲突
+
+**解决方法**
+
+https://github.com/microsoft/WSL/issues/4194
+
+https://github.com/microsoft/WSL/issues/4177
+
+如果其他方法无效，可以考虑每次启动WSL之前都运行一下`netsh winsock reset`。可以把它放到一个脚本里，保存到桌面上，每次需要用的时候直接点击运行。
