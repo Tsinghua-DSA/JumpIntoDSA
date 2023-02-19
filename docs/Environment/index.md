@@ -4,13 +4,19 @@
 
 因此我们推荐同学们采用如下的 C++ 编译和开发环境：
 
-操作系统：Windows 中的 WSL2、Linux 或 macOS
+操作系统：Windows 中的 WSL2、Linux 或 macOS, 掌握命令行的bash基础使用。
 
-C++ 编译和调试工具：g++, gdb
+C++ 编译和调试工具：g++, gdb, 掌握从命令行使用它们的方法。
 
 C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 
 使用统一的开发环境，将有助于减少平台不同导致的编译问题/未定义行为，方便同学们之间互相帮助调试，方便助教为同学们解决开发环境的问题。
+
+
+!!! question "为什么要求掌握命令行的使用？而不使用Visual Studio/Dev CPP等以图形界面为主的IDE? "\
+
+    对于编程开发来说，命令行的操作具有比图形界面更高的自由度,图形界面只是将一些常用操作实现成了容易使用的形式。而一些较为复杂的代码工作甚至是没有图形界面可用的。另外，本课程的LAB题目形式多样，一些任务使用命令行操作更容易完成。
+
 
 ## 安装 VS Code
 
@@ -31,6 +37,8 @@ C++ 开发环境：VS Code, 安装 C/C++ Extension Pack
 ## 安装WSL2(Windows)
 
 参考 [微软WSL2文档](https://docs.microsoft.com/zh-cn/windows/wsl/install)
+
+[这个链接](https://learn.microsoft.com/zh-cn/windows/wsl/setup/environment)是微软WSL2文档中关于安装WSL的分步教程。
 
 然后安装 VS Code的 `WSL` 扩展, 用`Remote - WSL`的方式进行开发。
 
