@@ -17,6 +17,7 @@ nav:
     - C/index.md
     - C/recursion.md
     - C/pointer.md
+    - C/cmdarg.md
   - C++快速入门: 
     - C++/index.md
     - 类和对象: C++/Class&Object.md
