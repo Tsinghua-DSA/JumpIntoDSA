@@ -61,3 +61,21 @@ https://github.com/microsoft/WSL/issues/4194
 https://github.com/microsoft/WSL/issues/4177
 
 如果其他方法无效，可以考虑每次启动WSL之前都运行一下`netsh winsock reset`。可以把它放到一个脚本里，保存到桌面上，每次需要用的时候直接点击运行。
+
+### 2.3 通过apt安装g++/gdb/gcc时出错
+
+**表现**
+
+报错信息最后几行 `E: Failed to fetch......`
+
+报错信息最后一行 `E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?`
+
+**原因**
+
+apt软件包管理器的信息需要更新
+
+**解决方法**
+
+执行`sudo apt-get update`更新apt软件包管理器的信息。
+
+如果报错信息中有`Permission Denied`: 可能需要在命令前加`sudo`用管理员权限执行。
