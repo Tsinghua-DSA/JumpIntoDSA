@@ -32,6 +32,9 @@ nav:
   - 数学基础: Math/index.md
   - 如何自学知识点: DIY/index.md
   - 练习题目: Practice/index.md
+  - 补充讲解:
+    - Supplement/index.md
+
 
 markdown_extensions:
   - admonition
