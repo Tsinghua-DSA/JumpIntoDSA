@@ -13,6 +13,7 @@ nav:
   - 环境搭建: 
     - Environment/index.md
     - Environment/wsl_error.md
+    - Environment/gdb.md
   - C语言专题讲解: 
     - C/index.md
     - C/recursion.md

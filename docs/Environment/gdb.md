@@ -15,208 +15,276 @@ GDB 是一个命令行工具，在终端里运行。你需要在一个UNIX环境
 
 GDB把你想调试的可执行文件作为它的参数。不是.c文件或者.o文件， 而是编译后的可执行文件的名字，通常没有扩展名。
 
-这里我将在LAB0 Jump Into DSA里运行GDB。
+这里我将在数据结构与算法的LAB0里运行GDB。
 
-# TODO: 下面cs107e assignment1里用gdb的演示，替换为用lab0 jump into dsa的演示
+首先，在命令行里，`cd` 到 LAB0的目录下，通过`g++ solution_1.cpp -o sol1 -g`编译为可执行文件。然后我启动gdb:
 
-Here's how I'd start GDB on my Assignment 1. I have cd'ed to my assign1 directory and I've already compiled and compiled my "myprogram" executable. I issue the command gdb and the name of my executable as below:
-
-gdb myprogram
-This starts up gdb, prints the following output, and now I have the (gdb) prompt:
-
-GNU gdb (Ubuntu 7.7.1-0ubuntu5~14.04.2) 7.7.1
-Copyright (C) 2014 Free Software Foundation, Inc.
-... blah blah...
-Reading symbols from myprogram...done.
+```
+gdb sol1
+```
+这会打印出类似下面的提示信息，并且在一行的开始有一个`(gdb)`提示符。
+```
+GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+......(省略)
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from sol1...
 (gdb)
-Once you've got the (gdb) prompt, the run command starts the executable running. If the program you are debugging requires any command-line arguments, you specify them to the run command. If I wanted to run my program with the arguments "julie", I'd do the following:
+```
+在有 `(gdb)`提示的情况下，命令`run`会启动程序的运行。如果你想在程序运行时给他什么命令行参数，你要把参数加到`run` 命令的后面。
 
-(gdb) r julie
-Starting program: /afs/ir.stanford.edu/users/z/e/zelenski/myprogram julie
-This starts the program running. When the program stops, you'll get your (gdb) prompt back.
+如果我想让程序把输出重定向到`1.out`,我需要这么做:
 
-Setting breakpoints
-Normally, your program only stops when it exits. Breakpoints allow you to stop your program's execution wherever you want, be it at a function call or a particular line of code. Breakpoints are an essential tool that allow you to stop and examine the program state at a specific context within the execution.
+```
+(gdb) r sol1 > 1.out
+Starting program: /home/my/path/LAB1/sol1 sol1 > 1.out
+```
+这会让程序开始运行。等到程序结束的时候，行首的`(gdb)`提示符又会出现。
 
-Before you start your program running, you want to set up your breakpoints. The break command allows you to do so.
+### 设置断点(breakpoints)
 
-To set a breakpoint at the beginning of the function named main:
+通常来说，程序在return退出主函数的时候停止运行。通过断点，你可以让程序的执行在任意时刻挺下来，比如在某个函数调用或者某行代码的地方。断点是一个很重要的工具，通过它你可以在执行到特定场景时，让程序停下来，检查程序的执行状态。
 
+通过你需要在程序启动之前把断点设置好，使用的命令为`break`。
+
+例如，这样做可以在名字叫做main的函数开始时设置断点：
+
+```
 (gdb) b main
-Breakpoint 1 at 0x400a6e: file myprogram.c, line 44.
-To set a breakpoint at a particular line number in myprogram.c:
+Breakpoint 1 at 0x555555555189: file solution_1.cpp, line 3.
+```
 
-(gdb) b myprogram.c:47
-Breakpoint 2 at 0x400a8c: file myprogram.c, line 47.
-Every time you create a breakpoint, it's assigned a number. If you want to delete a breakpoint, just use the delete command.
+给solution_1.cpp的某一行设置断点:
 
-To delete the breakpoint numbered 2:
+```
+(gdb) b solution_1.cpp:10
+Breakpoint 2 at 0x555555555225: file solution_1.cpp, line 11.
+```
 
+每次你设置断点时，gdb会给这个断点一个编号。如果你想删除一个断点，使用`delete`命令。
+
+例如删除编号为2的断点:
+
+```
 (gdb) del 2
-If you lose track of your breakpoints, or you want to see their numbers again, the "info break" command lets you know which ones are active:
+```
 
+如果你搞不清设置了哪些断点，或者想看一下当前断点的编号都是什么，可以用`info break`命令查看当前生效的断点。
+
+```
 (gdb) info break
 Num     Type           Disp Enb Address            What
-1       breakpoint     keep y   0x0000000000400a6e in main at myprogram.c:44
-Finally, notice that it's much easier to remember function names than line numbers (and line numbers change from run to run when you're changing your code), so ideally you will set breakpoints by name. If you have decomposed your code into small, tight functions, setting breakpoints will be easy. On the other hand, wading through a 50-line function to find the right place for a breakpoint is unpleasant, so yet another reason to decompose your code cleanly from the start!
+1       breakpoint     keep y   0x0000555555555189 in main() at solution_1.cpp:3
+2       breakpoint     keep y   0x0000555555555225 in main() at solution_1.cpp:11
+```
 
-The following sections deal with things you can do when you're stopped at a breakpoint, or when you've encountered a segfault or bus error.
+最后，注意函数名比行号更容易记住，而且在你修改程序的时候行号经常会发生变动，所以理想情况下我们通过函数名来设置断点。如果你将函数分解成小的、紧凑的函数，设置断点会很容易。反过来，在一个50行的函数里找打断点的合适地方会很难受。这也说明为什么要从一开始就保持良好的代码风格。
 
-Examining program state
-Backtrace
-Easily one of the most immediately useful things about GDB is its ability to give you a backtrace (or a "stack trace") of your program's execution at any given point. This works especially well for locating things like segfaults and bus errors. If a program named reassemble segfaults during execution of a function named read_frag, GDB will print the following information:
+接下来的部分会介绍，当你的程序停在一个断点处，或因为触发段错误等原因而暂停运行时，你可以做哪些事情。
 
+!!! question "什么是段错误?"
+
+    系统报错"segmentation fault"的一类程序运行错误，通常和内存错误有关，如数组越界、访问空指针都可能导致段错误。
+
+
+### 检查程序的状态
+
+**回溯 Backtrace**
+
+GDB最有用的一个功能就是，它能给你看一下当前的函数调用路径（或者说，“函数调用栈”）。这对于定位段错误之类的bug尤其有用。
+
+如果一个叫做reassemble的程序在一个叫做read_flag的函数里发生了段错误，GDB会打印下面这样的信息:
+
+```
 Program received signal SIGSEGV, Segmentation fault.
 0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
 51      if (strlen(unusedptr) == MAX_FRAG_LEN)
-Not only is this information vastly more useful than the terse "Segmentation fault" error that you get outside of GDB, you can use the backtrace command to get a full stack trace of the program's execution when the error occurred:
+```
 
+这比不用GDB时的一个“Segmentation Fault”的系统错误信息更有用。你还可以通过 `backtrace` 命令来获取程序此时的完整函数调用状态。
+```
 (gdb) backtrace
 #0  0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
 #1  0x0000000000400bd7 in read_all_frags (fp=fp@entry=0x603010, arr=arr@entry=0x7fffffff4cb0, maxfrags=maxfrags@entry=5000) at reassemble.c:69
 #2  0x00000000004010ed in main (argc=<optimized out>, argv=<optimized out>) at reassemble.c:211
-Each line represents a stack frame (ie. a function call). Frame #0 is where the error occurred, during the call to read_frag. The hexadecimal number 0x0000000000400ac1 is the address of the instruction that caused the segfault (don't worry if you don't understand this, we'll get to it later in the quarter). Finally, you see that the error occurred from the code in reassemble.c, on line 51. All of this is helpful information to go on if you're trying to debug the segfault.
+```
 
-You're likely to want to check into the values of certain key variables at the time of the problem. The print command is perfect for this:
+每一行代表一个栈帧(stack frame), 也就是一次函数调用. 栈帧 #0 是错误发生的地方, 对read_frag的调用.十六进制的 0x0000000000400ac1 是导致段错误的指令地址(程序是一长串指令连成的数据,那么里面每一条指令当然有一个地址). 最后,你会看到出错的地方是 reassemble.c 的51行. 如果你要调试这个段错误, 这些都是很有用的信息.
 
-Variables and expressions
-To print out the value of variables:
+在调试的时候, 你也很可能想看一下特定变量的取值. `print` 命令此时很好用.
 
-(gdb) p nread
-$1 = 0
-(gdb) p fp
-$2 = (FILE *) 0x603010
-(gdb) p start
-$3 = 123 '{'
-You can also use print to evaluate expressions, make function calls, reassign variables, and more.
+**变量和表达式**
 
-Sets the first character of buffer to be 'a':
+为了打印变量的数值:
 
-p buffer[0] = 'Z'
-$4 = 90 'Z'
-Print result of function call:
+```
+(gdb) b main
+Breakpoint 1 at 0x1189: file solution_1.cpp, line 3.
+(gdb) r
+Starting program: /home/wsliu/LAB1/sol1 
 
-(gdb) p strlen (buffer)
-$5 = 10
-The following commands are handy for quickly printing out a group of variables in a particular function
+Breakpoint 1, main () at solution_1.cpp:3
+3       int main(){
+(gdb) p n
+$1 = 32767
+(gdb) p m
+$2 = 1431655277
+(gdb) p q
+$3 = 21845
+```
+这打印了`solution_1.cpp`的n,m,q未初始化时的数值.
 
-info args prints out the arguments to the current function you're in:
+你甚至可以通过print来求值表达式, 调用函数, 给变量重新赋值,等等.
 
+设置变量n的数值为1:
+
+```
+p n=1
+$4 = 1
+```
+
+打印函数调用的返回值:
+
+```
+(gdb)  p memset(matrix, 10, 0)
+$5 = (void *) 0x555555558040 <matrix>
+```
+
+下面的命令可以快速打印一个函数中的较多变量.
+
+`info args`打印当前函数的所有参数.
+
+如果当前函数没有参数,打印 "No arguments".
+```
 (gdb) info args
-fp = 0x603010
-nread = 0
-info locals prints out the local variables of the current function:
+No arguments.
+```
 
+`info locals`打印当前函数所有局部变量.
+```
 (gdb) info locals
-start = 123 '{'
-end = 125 '}'
-nscanned = 3
-Stack frames
-If you're stopped at a breakpoint or at an error, you may also want to examine the state of stack frames further back in the calling sequence. You can use the up and down commands for this.
+n = 32767
+m = 1431655277
+q = 21845
+sum = 1431654560
+(gdb) print n=10
+$1 = 10
+(gdb) info locals
+n = 10
+m = 1431655277
+q = 21845
+sum = 1431654560
+```
+**栈帧**
 
-up moves you up one stack frame (e.g. from a function to its caller)
+当你暂停程序运行时, 除了当前函数, 你有时也需要看一下上层调用它的函数. `up`和`down`命令可以用来做这个事情, 在函数调用序列里上下移动.
 
+
+up 会让你向上移动一个栈帧 (从被调用的函数移动到调用它的函数), down反之.
+
+下面的例子先从read_frag向上移动到调用它的read_all_frags, 然后向下移动回read_frag.
+
+```
 (gdb) up
 #1  0x0000000000400bd7 in read_all_frags (fp=fp@entry=0x603010, arr=arr@entry=0x7fffffff4cb0, maxfrags=maxfrags@entry=5000) at reassemble.c:69
 69          char *frag = read_frag(fp, i);
-down moves you down one stack frame (e.g. from the function to its callee)
-
 (gdb) down
 #0  0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
 51      if (strlen(unusedptr) == MAX_FRAG_LEN)
-The commands above are really helpful if you're stuck at a segfault and want to know the arguments and local vars of the faulting function's caller (or that function's caller, etc.)
+```
 
-Controlling execution
-run will start (or restart) the program from the beginning and continue execution until a breakpoint is hit or the program exits. start will start (or restart) the program and stop execution at the beginning of the main function.
+当发生段错误时, 你常常需要了解调用当前函数的函数的局部变量, 这时up和down会很有用.
 
-Once stopped at a breakpoint, you have choices for how to resume execution. continue will resume execution until the next breakpoint is hit or the program exits. finish will run until the current function call completes and stop there. You can single-step through the C source using the next or step commands, both of which execute a line and stop. The difference between these two is that if the line to be executed is a function call, next executes the entire function, but step calls function and stops at first line.
+### 控制程序执行
 
-Useful tips
-Most gdb commands can be abbreviated. The super-common commands can be shortened to just the first letter (s for step, b for break, c for continue, etc.). Others can be shortened to their unique prefix (cond for condition)
-You can restart your program at any point during its execution. Just use the r command again (it will prompt you to make sure you really want to restart). If you use without any arguments, since it remembers the last ones you entered.
-If you're using a Makefile, you can recompile from within GDB so that you don't have to exit and lose all your breakpoints. Just type make at the (gdb) prompt, and it will rebuild the executable. The next time you run, it will reload the updated executable and reset your existing breakpoints.
-Use GDB inside Emacs! It's just another reason why Emacs is really cool. Use "Ctrl-x 3" to split your Emacs window in half, and then use "Esc-x gdb" or "Alt-x gdb" to start up GDB in your new window. If you are physically at one of the UNIX machines, or if you have X11 forwarding enabled, your breakpoints and current line show up in the window margin of your source code file.
-Looking to learn some fancier tricks? See these articles Julie wrote for a programming journal: Breakpoint Tricks and gdb's Greatest Hits. There's also the full online gdb manual to learn all the ins and outs: http://sourceware.org/gdb/current/onlinedocs/gdb/index.html.
+`run`命令可以让程序开始执行,或者在程序停在断点时让程序继续执行. `start`让程序从头开始执行,并停在main函数开始时.
 
-Common questions about gdb
-When I start gdb, it complains the program is missing. What is wrong?
+当你停在断点时, 你可以选择如何让程序继续执行. `continue`命令会让程序继续执行到下一个断点或直到程序结束. `finish`会让当前函数执行完毕并在此处暂停. 你可以用`next`或`step`命令来单步执行, 这两个命令都会执行一行代码, 然后暂停一下. 区别在于, 如果这一行有函数调用, `next`会执行完成这个函数, `step`会调用函数并暂停在函数里的第一行.
+
+### 实用建议
+大部分gdb命令都可以缩写. 最常见的命令可以只用首字母.(s-step, b-break, c-continue, 等等). 其他命令也可以尽量的缩短(cond-condition) 
+
+你可以在程序执行到任何地方的时候重启,用命令`r`就可以(gdb会要你确认是否真的想从头开始). 如果你没有输入参数, 它会自动复用上一次使用的参数. (如 > 1.out 之类的参数).
+
+如果你用Makefile编译, 你可以在GDB里面重新编译, 不需要退出GDB之后重新打断点. 在(gdb)提示符后面敲make命令, 根据正确的Makefile, 就会编译可执行文件. 下一次输入run命令的时候, 就会重新加载新的可执行文件并把已有的断点加进去.
+
+### 常见问题
+
+**尝试启动gdb, 报错"No such file or directory", 怎么办?**
+
+```
 gdb myprogram
 myprogram: No such file or directory.
 (gdb)
-This errors means there's no program named myprogram in your current working directory. Here are some of more likely causes for this error: you're in the wrong directory, you mistyped the name, or you haven't yet compiled your code.
+```
 
-When I run my program under gdb, it complains about missing symbols. What is wrong?
+错误信息表示当前目录里没有找到你指定的名字的可执行文件. 可能原因: 打错了程序名字, 当前在错误的目录下, 忘了编译代码为可执行文件.
+
+**报错no debugging symbols found, 也无法使用函数名和变量名来调试, 怎么办?**
+```
 gdb myprogram
 Reading symbols from myprogram...(no debugging symbols found)...done.
 (gdb)
-This means the program was not compiled with debugging information. Without this information, gdb won't have full symbols for setting breakpoints or printing values or other program tracing features. There's a flag you need to pass to gcc to build debugging info into the executable. If you're using raw gcc, add the -g flag to your command. If you're using a Makefile, make sure the CFLAGS line includes the -g flag.
+```
 
-When I view my code from within in gdb, it warns that the source file is more recent. What does this mean?
+错误信息表示, 编译时, 编译器没有加入调试所需的符号, 这是编译选项不合适导致的. 在编译选项里加上`-g`.
+
+**gdb警告 the source file is more recent, 怎么办**
+
+```
 (gdb) list
 warning: Source file is more recent than executable.
-This means that you have edited one or more of your .c source files, but have not recompiled those changes. The program being executed will not match the edited source code and gdb's efforts to try to match up the two will be hopelessly confused. You can quit out of gdb, make, and then restart gdb, or even more conveniently, make from with gdb will rebuild the program and reload it at next run, all without leaving gdb.
+```
 
-How do I use gdb on a program that takes command-line arguments? I tried passing them when I start gdb, but it complains.
+这表示你修改了一些代码, 但修改后没有重新编译. gdb 此时无法把当前的可执行文件和代码文件放在一起调试. 退出gdb, 重新编译, 然后再进入gdb.
+
+**尝试给程序传入命令行参数, 但是报错了**
+
+```
 gdb myprogram julie
 Reading symbols from myprogram...done. 
 "julie" is not a core dump: File format not recognized"
 (gdb)
-The program arguments aren't specified when invoking gdb, they are given to the run command once within gdb. A correct sequence is shown below:
+```
 
+程序运行时的命令行参数不应当在启动gdb的时候传入,而应该在 run 命令之后加入. 正确做法是下面这样:
+
+```
 gdb myprogram
 Reading symbols from myprogram...done.
 (gdb) run julie
-I step into a library function and gdb complains about a missing file. What is this and what should I do about it?
+```
+
+**我单步调试进了一个库函数, gdb说找不到源文件, 怎么办?**
+
+```
 (gdb) s
 _IO_new_fopen (filename=0xffffdc9f "samples/input", mode=0x804939a "r") at iofopen.c:102
 102 iofopen.c: No such file or directory.
-The step command usually executes the next single line of C code. If that line makes a function call, step will advance into that function and allow you trace inside the call. However, if the function is a library function, gdb will not be able to display/trace inside it because the necessary source files are not available on the system. Thus, if asked to step into a library call, gdb responds with this harmless complaint about "No such file". At that point, you can use finish to continue through the current function. As alternative to step, the next command will execute the entirety of the next line, completing all function calls rather than attempting to step into them.
+```
+step命令通常执行下一行代码, 如果下一行是函数, 会跳到函数里执行函数的下一行代码. 但在库函数里, gdb缺乏必要的源文件来调试. 因此, gdb会表示"No such file". 这是你可以通过 finish 命令来结束当前函数. 或者, 一开始的时候不要用step, 而是用next命令将下一行执行完, 不管是不是一个函数调用, 不去函数里面单步运行.
 
-My program crashes within a library function. It's not my fault the library is broken! What can I do?
+**我的程序在库函数里段错误了, 怎么办?**
+```
 Program received signal SIGSEGV, Segmentation fault.
 __strcmp_ssse3 () at ../sysdeps/i386/i686/multiarch/strcmp-ssse3.S:232
 232 ../sysdeps/i386/i686/multiarch/strcmp-ssse3.S: No such file or directory.
-The example crash shown above is occurring during a call to strcmp, a function from the standard library. The arguments to strcmp are expected to be valid char*s. If given an invalid address, the function will crash trying to read from that location. The library function does not have a bug, the mistake is that you are passing an invalid argument; look at your call to strcmp to resolve your bug. The complaint about missing files (discussed above) is a harmless warning you can safety ignore. On the other hand, the bug in your use of the library function needs to be investigated further! :-)
+```
 
-When I start gdb, it gives a long warning about auto-loading being declined. What's wrong?
-Reading symbols from bomb...(no debugging symbols found)...done.
-warning: File "/afs/ir.stanford.edu/users/z/e/zelenski/a5/.gdbinit" auto-loading has been declined by your `auto-load safe-path' set to "$debugdir:$datadir/auto-load".
-To enable execution of this file add
-    add-auto-load-safe-path /afs/ir.stanford.edu/users/z/e/zelenski/a5/.gdbinit
-line to your configuration file "/afs/ir/users/z/e/zelenski/.gdbinit".
-... blah blah blah ...
-A .gdbinit file is used to set a startup sequence for gdb. However, for security reasons, loading from a local .gdbinit is disabled by default. If there is a .gdbinit in the current directory and you have not configured gdb to allow loading it, gdb complains to alert you that this .gdbinit file is being ignored. To enable loading, you must edit your personal gdb configuration file to change your auto-load setting. Your personal gdb configuration is ~/.gdbinit (a hidden file in your home directory). A .gdbinit file is a plain text file you can edit with your favorite editor. If file doesn't yet exist, you will need to create it. The line you need to add is set auto-load safe-path /. Alternatively, you can copy and paste the command below to append the proper setting to your personal configuration file, creating the file if it doesn't already exists. You will need to make this configuration change only once.
+有可能是你传给库函数的参数有问题, 例如, 对于需要访问内存的库函数, 你传给他一个空指针, 就会导致内存访问出错. 这里建议你仔细检查一下传给它的参数.
 
-bash -c 'echo set auto-load safe-path / >> ~/.gdbinit'
-You can check your current configuration by searching your personal configuration file for the setting. See command below and expected response:
 
-myth> grep auto-load ~/.gdbinit
-set auto-load safe-path /
-Once your personal configuration is appropriately set, there will be no further complaints from gdb about declining auto-load and it will load any local .gdbinit file on start.
-
-When my program finishes, gdb prints a message calling my program "inferior". What have I done to offend gdb?
+**程序结束的时候, gdb说我的程序是 "inferior"的(中文: 更内部的, 更弱小的), 我冒犯到gdb了吗?**
+```
 [Inferior 1 (process 25178) exited normally]
                   or
 [Inferior 1 (process 25609) exited with code 01]
-Don't take it personally, gdb runs your program as a sub-process which it terms the "inferior". The message indicates the program has run to completion and exited in a controlled fashion-- there was no segmentation fault, abort, hang, or other catastrophic termination condition.
+```
 
-When I run gdb without a program, some things (like sizeof and typecasts) behave differently. What's happening?
-myth$ gdb
-(gdb) p sizeof(long)
-$1 = 4
-(gdb) p/x (long)-1
-$2 = 0xffffffff
-(gdb)
-By default, gdb determines your CPU architecture based on the program you're debugging. If you don't specify a program when starting gdb, it defaults to assuming a 32-bit system, rather than the 64-bit system that all of the programs we write will use. Starting gdb on one of your CS107 programs (any one will do) will cause gdb to use the proper architecture. You can also manually put gdb into 64-bit mode with the following command:
-
-set architecture i386:x86-64
-After that, the above commands should now print correctly:
-
-myth$ gdb
-(gdb) set architecture i386:x86-64
-The target architecture is assumed to be i386:x86-64
-(gdb) p sizeof(long)
-$1 = 8
-(gdb) p/x (long)-1
-$2 = 0xffffffffffffffff
-(gdb)
+别太在意, gdb将你的程序作为一个子进程运行, 因此是"内部的". "exited normally" 表示程序正常结束, 没有发生段错误或死循环等无法正常退出的情况.
