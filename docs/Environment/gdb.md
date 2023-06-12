@@ -119,6 +119,8 @@ Program received signal SIGSEGV, Segmentation fault.
 
 在调试的时候, 你也很可能想看一下特定变量的取值. `print` 命令此时很好用.
 
+如果不了解什么是栈帧，可以参考 [https://tsinghua-dsa.github.io/JumpIntoDSA/C/recursion/](https://tsinghua-dsa.github.io/JumpIntoDSA/C/recursion/)
+
 **变量和表达式**
 
 为了打印变量的数值:
