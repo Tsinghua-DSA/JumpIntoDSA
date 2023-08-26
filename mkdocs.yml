@@ -29,7 +29,7 @@ nav:
     - 模板简介: C++/Templates.md
     - 内存分配: C++/Memory.md
     - 引用: C++/Reference.md
-  - LAB0: LAB0/index.md
+  - LAB1: LAB1/index.md
   - 数学基础: Math/index.md
   - 如何自学知识点: DIY/index.md
   - 练习题目: Practice/index.md

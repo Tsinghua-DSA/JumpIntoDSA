@@ -1,4 +1,4 @@
-# LAB0
+# LAB1
 
 这是往年学期THU课堂的第一道题目的部分内容。每个学期使用的题目版本可能会有变化。
 
@@ -127,7 +127,7 @@ n,m <= 2000，q <= 100000
 
 首先准备一个命令行环境。我们建议你使用类Unix命令行环境（可以是linux命令行、Mac OS命令行 或 Window Subsystem for Linux，即WSL）进行开发，并使用较高版本的g++/clang++编译器，结合Visual Studio Code编辑器进行开发。如果使用其他开发环境，并遇到和环境有关的问题，助教将无法为你提供帮助。配置环境中遇到问题请联系助教。
 
-下载附件: https://github.com/Tsinghua-DSA/JumpIntoDSA/blob/main/docs/LAB0/LAB0.zip。
+下载附件: https://github.com/Tsinghua-DSA/JumpIntoDSA/blob/main/docs/LAB1/LAB1.zip。
 
 附件中包含例题的两份代码（solution_1.cpp和solution_2.cpp)，时间复杂度不同，各自具有一些bug。另外还包括一个“多文件项目”，在link文件夹下。
 
