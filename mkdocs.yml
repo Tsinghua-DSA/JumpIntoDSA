@@ -30,6 +30,9 @@ nav:
     - 内存分配: C++/Memory.md
     - 引用: C++/Reference.md
   - LAB1: LAB1/index.md
+  - 习题课: 
+    - Recitation/index.md
+    - Recitation/2023Fall/rec1.md
   - 数学基础: 
     - Math/index.md
     - 集合: Math/set.md
