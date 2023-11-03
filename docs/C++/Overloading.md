@@ -52,3 +52,28 @@ int main()
     a few misleading comments can also create great confusion.
     [8] (∗3) Swap the result of §X.19[7] with a friend. Without running it, figure out what your
     friend’s program does. When you have completed this exercise, you’ll know what to avoid.
+
+
+### 函数对象
+
+如果重载了函数调用运算符，就可以将对象当作函数进行调用，同时也能当作变量进行赋值、传参。主要替代了C语言当中函数指针的作用。
+
+例如，标准库的std::sort(), 就可以接受一个函数指针/函数对象作为参数, 用来确定如何比较两个数的大小。
+
+也可以看下面这段程序：
+
+```c++
+#include <cstdio>
+struct Adder{
+        int operator () (int a, int b){
+                return a+b;
+        }
+};
+int main(){
+        printf("%d\n",Adder()(1,2));
+};
+```
+
+`Adder()`构造了一个新的Adder类型的结构体，随后调用了它重载的括号运算符/函数调用运算符, 传入 a=1, b=2, 获得了相加的结果。
+
+另外，较新的C++标准中还加入了 lambda表达式的语法特性，也可以起到类似"函数对象"的作用，感兴趣可以了解一下。
