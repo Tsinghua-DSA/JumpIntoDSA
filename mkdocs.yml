@@ -30,15 +30,14 @@ nav:
     - 模板简介: C++/Templates.md
     - 内存分配: C++/Memory.md
     - 引用: C++/Reference.md
-  - LAB1: LAB1/index.md
-  - 习题课: 
-    - Recitation/index.md
-    - Recitation/2023Fall/rec1.md
   - 数学基础: 
     - Math/index.md
     - 集合: Math/set.md
-  - 如何自学知识点: DIY/index.md
-  - 练习题目: Practice/index.md
+  - 如何自学知识点: 
+    - DIY/index.md
+    - DIY/more_PA.md
+  - 调试辅导课: 
+    - Debugging/index.md
   - 补充讲解:
     - Supplement/index.md
 
