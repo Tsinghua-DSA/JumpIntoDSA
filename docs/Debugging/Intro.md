@@ -12,6 +12,9 @@
 举例: 贪吃蛇程序
 
 ```c++
+
+//sudo apt install ncurses-dev
+
 //gcc -o snake snake.c -lncurses
 //g++ -o snake snake.cpp -lncurses
 #include <ncurses.h>
