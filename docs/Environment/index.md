@@ -77,7 +77,7 @@ VS Code需要打开一个当前工作目录来进行开发。在Windows里，建
 
 利用好搜索引擎和VS Code的帮助文档即可。
 
-在Windows中, `Ctrl + Shift + P`呼出命令面板, 然后输入`remote-wsl`, 就会蹦出很多和wsl相关的候选命令。可以通过`New WSL Window` 打开一个运行在WSL上的VS Code窗口。
+在Windows下的VS Code中, `Ctrl + Shift + P`呼出命令面板, 然后输入`remote-wsl`, 就会蹦出很多和wsl相关的候选命令。可以通过`New WSL Window` 打开一个运行在WSL上的VS Code窗口。
 
 打开一个工作目录(你的代码所在的文件夹), 一般是在菜单栏的`File`中选择`Open Folder`。
 
