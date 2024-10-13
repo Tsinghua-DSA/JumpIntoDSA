@@ -1,0 +1,1293 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="wsl_error/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>环境搭建 - JumpIntoDSA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="JumpIntoDSA" class="md-header__button md-logo" aria-label="JumpIntoDSA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            JumpIntoDSA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              环境搭建
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="JumpIntoDSA" class="md-nav__button md-logo" aria-label="JumpIntoDSA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    JumpIntoDSA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    环境搭建
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            环境搭建
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="wsl_error/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WSL常见问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gdb快速入门
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="applet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java Applet 环境配置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../C/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    C语言专题讲解
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            C语言专题讲解
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C/recursion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    递归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C/pointer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指针
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C/cmdarg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    命令行参数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../C%2B%2B/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    C++快速入门
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            C++快速入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Class%26Object/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    类和对象
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Cons%26Dest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    构造析构
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Inheritance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    继承
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Polymorphism/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多态
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Overloading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    运算符重载
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Templates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模板简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Memory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    内存分配
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../C%2B%2B/Reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    引用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../Math/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    数学基础
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            数学基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Math/set/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../DIY/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    如何自学知识点
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            如何自学知识点
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DIY/more_PA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更多练习题目
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../Debugging/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    调试辅导课
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            调试辅导课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging/Intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging/Style/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    遵从不易出错的代码风格
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging/Testcase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    测例构造的技巧
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Debugging/Tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    工具使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../Supplement/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    补充讲解
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            补充讲解
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vs-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装 VS Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wsl2windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      安装WSL2(Windows)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs-code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      VS Code快速上手指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      bash快速上手指南
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      算法演示
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="_1">环境搭建</h1>
+<p>数据结构编程作业大部分是单文件项目, 有一些是轻量级的多文件项目，不引入第三方依赖。因此只需要轻量级的C++开发环境。</p>
+<p>因此我们推荐同学们采用如下的 C++ 编译和开发环境：</p>
+<p>操作系统：Windows 中的 WSL2、Linux 或 macOS, 掌握命令行的bash基础使用。</p>
+<p>C++ 编译和调试工具：g++, gdb, 掌握从命令行使用它们的方法。</p>
+<p>C++ 开发环境：VS Code, 安装 C/C++ Extension Pack</p>
+<p>使用统一的开发环境，将有助于减少平台不同导致的编译问题/未定义行为，方便同学们之间互相帮助调试，方便助教为同学们解决开发环境的问题。</p>
+<div class="admonition question">
+<p class="admonition-title">为什么要求掌握命令行的使用？而不使用Visual Studio/Dev CPP等以图形界面为主的IDE? </p>
+<p>对于编程开发来说，命令行的操作具有比图形界面更高的自由度,图形界面只是将一些常用操作实现成了容易使用的形式。而一些较为复杂的代码工作甚至是没有图形界面可用的。另外，本课程的LAB题目形式多样，一些任务使用命令行操作更容易完成。</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">我使用M1芯片的Mac，gdb尚未为其提供支持，怎么办?</p>
+<p>可以尝试使用 lldb 作为 gdb 的替代品。lldb扩展了gdb的一部分命令，但gdb的命令在lldb也可以使用。</p>
+</div>
+<h2 id="vs-code">安装 VS Code</h2>
+<p>通过<a href="https://code.visualstudio.com/">VS Code 官网</a> 下载安装即可。</p>
+<p>关于VS Code C++开发的配置，</p>
+<ul>
+<li>
+<p>linux可参考: <a href="https://code.visualstudio.com/docs/cpp/config-linux">https://code.visualstudio.com/docs/cpp/config-linux</a></p>
+</li>
+<li>
+<p>Windows(WSL)可参考: <a href="https://code.visualstudio.com/docs/cpp/config-wsl">https://code.visualstudio.com/docs/cpp/config-wsl</a></p>
+</li>
+<li>
+<p>Mac OS 可参考: <a href="https://code.visualstudio.com/docs/cpp/config-clang-mac">https://code.visualstudio.com/docs/cpp/config-clang-mac</a> </p>
+</li>
+</ul>
+<p>注意这些配置会较多使用VS Code中的C++开发辅助功能。如果熟练使用，可能有助于提升开发效率，但并不是必须的。</p>
+<p>从快速上手的角度，建议先不折腾这些高级功能，使用命令行来完成编译、运行、调试。</p>
+<h2 id="wsl2windows">安装WSL2(Windows)</h2>
+<p>参考 <a href="https://docs.microsoft.com/zh-cn/windows/wsl/install">微软WSL2文档</a></p>
+<p><a href="https://learn.microsoft.com/zh-cn/windows/wsl/setup/environment">这个链接</a>是微软WSL2文档中关于安装WSL的分步教程。</p>
+<p>然后安装 VS Code的 <code>WSL</code> 扩展, 用<code>Remote - WSL</code>的方式进行开发。</p>
+<p>这是一个相当常见的环境配置步骤，你可以尝试在一些视频网站(bilibili等）选择合适的关键词，搜索视频教程。</p>
+<div class="admonition question">
+<p class="admonition-title">WSL 是什么?</p>
+<p>在本课程中，可以这样理解：是一种在windows操作系统的电脑上，安装linux双系统/虚拟机的便捷途径。</p>
+<p>安装WSL的时候，Windows操作系统会将自己的一部分磁盘划分给WSL，在里面安装一个Linux操作系统。随后我们就可以在Windows里打开这个Linux操作系统，对于用户来说，这就相当于你有了两台电脑，一台安装了Windows，一台安装了Linux，虽然你只使用了一台电脑的硬件。</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Remote - WSL 是什么?</p>
+<p>Remote-WSL的逻辑和Remote-SSH相同。Remote-SSH的工作方式是，通过ssh网络协议远程连接到另一台电脑上，然后你在本地的机器上使用VS Code编程，就好像直接在远程的另一台电脑上工作一样。而Remote-WSL的工作方式很类似，也是打开了WSL的Linux操作系统（“虚拟机”）之后，使用VS Code 编程，就好像你直接在一台Linux操作系统的机器上使用VS Code编程一样。</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">我在安装WSL的过程中/在WSL里安装软件的过程中遇到错误信息, 怎么办?</p>
+<p>这种错误很可能有人遇到过，首先可以尝试将错误信息粘贴到搜索引擎里进行搜索，尝试一些解决方法。如果无效，请描述目前做过的步骤和解决问题的尝试，将错误信息截图发到网络学堂答疑区，助教会帮你解决。</p>
+<p>一些常见问题的解决方法可以参考文档的<a href="wsl_error/">这一部分</a></p>
+</div>
+<h2 id="vs-code_1">VS Code快速上手指南</h2>
+<div class="admonition question">
+<p class="admonition-title">我应该如何配置使用VS Code的图形化调试功能? launch.json又是什么东西? </p>
+<p>出于思维的惯性和一些文档的引导, 很多同学在初次使用VS Code的时候，会尝试配置图形化的编译、调试等界面。但遇到一些复杂的需求(例如如何从文件输入), 同学们就会遇到障碍。</p>
+<p>"图形化界面易用" 是大量精心设计的、现成的图形化界面给同学们形成的错觉。在VS Code配置图形化调试界面, 其实并不是简单地“使用图形化界面”，而是更接近于通过launch.json等配置文件, 自己定制/开发一个图形化界面。</p>
+<p>实际上, 如果不熟悉从命令行使用g++编译, gdb调试的一系列操作, 我们很难理解VS Code的图形化调试界面如何运作。</p>
+<p>因此，在初学阶段，建议同学们优先掌握：直接从终端命令行敲命令，编译运行、调试的操作。在熟悉命令行的操作之后，再来尝试配置VS Code的图形化调试界面。</p>
+</div>
+<p>VS Code需要打开一个当前工作目录来进行开发。在Windows里，建议在WSL的<code>/home</code>目录下建立工作目录。</p>
+<p>你需要了解三件事情: </p>
+<p>如何打开当前工作目录</p>
+<p>如何在当前工作目录下新建文件和编辑文件</p>
+<p>如何在VS Code中打开当前工作目录的命令行终端</p>
+<p>利用好搜索引擎和VS Code的帮助文档即可。</p>
+<p>在Windows下的VS Code中, <code>Ctrl + Shift + P</code>呼出命令面板, 然后输入<code>remote-wsl</code>, 就会蹦出很多和wsl相关的候选命令。可以通过<code>New WSL Window</code> 打开一个运行在WSL上的VS Code窗口。</p>
+<p>打开一个工作目录(你的代码所在的文件夹), 一般是在菜单栏的<code>File</code>中选择<code>Open Folder</code>。</p>
+<p>点击VS Code最左侧的一列大按钮中最上面的一个, 会打开资源管理视图, 看到当前工作目录下的文件树。可以直接在这里右键菜单新建文件、选中打开文件等。</p>
+<p>在菜单栏<code>Terminal</code>中选择<code>New Terminal</code>就可以在当前工作目录下打开一个新的终端, 在里面用g++进行编译。</p>
+<p>另外, 也可以先打开新的终端，用<code>mkdir</code>新建一个文件夹，再打开这个文件夹作为当前工作目录。</p>
+<h2 id="bash">bash快速上手指南</h2>
+<p>WSL、linux、Mac OS的命令行都支持bash操作。</p>
+<p>你可以通过网上的文档摸索bash的使用，但并不意味着数据结构课上你需要精通它/理解它。</p>
+<ol>
+<li>理解当前工作目录的概念。正如同你操作图形界面时, 需要打开一个“当前文件夹”, 然后在这个文件夹里操作, 命令行界面中也会有一个“当前工作目录/当前路径”的概念，以当前路径为起点访问其他文件。</li>
+<li>学习这些命令的基础用法: ls, rm, mkdir, cd</li>
+<li>学习在你的命令行如何安装g++(Mac OS下可以用clang++), 然后使用g++从命令行编译运行<code>Hello, World</code>程序。</li>
+<li>学习如何在命令行让程序以某个文件为输入/输出到某个文件，形如<code>./a &lt; 1.in &gt; 1.out</code></li>
+</ol>
+<p>使用 <a href="https://docs.net9.org/basic/linux/#shell-101">计算机系学生科协技能引导文档</a> 来快速上手shell的使用（wsl/linux/Mac OS的shell语法基本上是通用的，除了通过命令行安装软件的方法需要你通过搜索引擎解决一下）</p>
+<p>Mac OS下建议使用<code>brew</code> , 可能需要从 https://brew.sh/ 安装，通过<code>sudo brew install g++</code>这种命令来安装g++。</p>
+<p>Linux/WSL下建议使用<code>apt</code>, 大部分情况无需安装<code>apt</code>, 直接通过<code>sudo apt install g++</code>这种命令来安装g++。可能需要先执行<code>sudo apt-get update</code>。</p>
+<div class="admonition question">
+<p class="admonition-title">如何通俗理解bash和shell？他们究竟是什么东西，起什么作用呢？</p>
+<p>bash和shell属于“命令行界面”（command-line interface），这是相对于我们使用的“图形用户界面”（graphic user interface)而言。</p>
+<p>图形用户界面中，我们用鼠标点击图标、选择菜单中的选项来要求执行某一项操作，而在命令行界面中，我们像写代码一样，按照语法（bash语法）来编写一些命令，请求操作系统执行某一项操作。</p>
+<p>例如，在图形用户界面中，我们打开一个文件夹folder1，右键点击一个文件FileA的图标，然后点击“删除”选项，就请求操作系统删除FileA这个文件。</p>
+<p>而在“命令行界面”（shell）中，我们将当前路径调整到folder1（“当前路径”相当于图形界面中“当前打开的文件夹”），然后在窗口中输入“rm FileA”，就请求操作系统删除FileA这个文件。</p>
+<p>更多的用法可以自由探索。</p>
+</div>
+<h2 id="_2">算法演示</h2>
+<p>我们的一些算法演示基于 <code>java applet</code> 构建, 需要安装较早版本的Java SE(推荐为Java SE8)</p>
+<p>建议从Oracle官方的旧版本存档链接下载适合你操作系统的版本: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html </p>
+<p>如果你使用的是ARM芯片的Mac电脑，可以下载其中适合于x86 MAC电脑的版本，可以正常运行。</p>
+<p>也可以考虑使用 https://www.cs.usfca.edu/~galles/visualization/Algorithms.html 之类基于javascript的演示。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.indexes", "content.code.annotate"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

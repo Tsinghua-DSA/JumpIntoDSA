@@ -1,0 +1,1492 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../wsl_error/">
+      
+      
+        <link rel="next" href="../applet/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>gdb快速入门 - JumpIntoDSA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gdb" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="JumpIntoDSA" class="md-header__button md-logo" aria-label="JumpIntoDSA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            JumpIntoDSA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              gdb快速入门
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="JumpIntoDSA" class="md-nav__button md-logo" aria-label="JumpIntoDSA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    JumpIntoDSA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    环境搭建
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            环境搭建
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wsl_error/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WSL常见问题
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    gdb快速入门
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    gdb快速入门
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      在GDB里运行一个程序
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      设置断点(breakpoints)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      检查程序的状态
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      控制程序执行
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实用建议
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见问题
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../applet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Java Applet 环境配置
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../C/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    C语言专题讲解
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            C语言专题讲解
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C/recursion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    递归
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C/pointer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指针
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C/cmdarg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    命令行参数
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../C%2B%2B/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    C++快速入门
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            C++快速入门
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Class%26Object/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    类和对象
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Cons%26Dest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    构造析构
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Inheritance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    继承
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Polymorphism/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    多态
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Overloading/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    运算符重载
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Templates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    模板简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Memory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    内存分配
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C%2B%2B/Reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    引用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Math/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    数学基础
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            数学基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Math/set/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../DIY/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    如何自学知识点
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            如何自学知识点
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DIY/more_PA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    更多练习题目
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Debugging/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    调试辅导课
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            调试辅导课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Debugging/Intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    概论
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Debugging/Style/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    遵从不易出错的代码风格
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Debugging/Testcase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    测例构造的技巧
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Debugging/Tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    工具使用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../Supplement/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    补充讲解
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            补充讲解
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gdb_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      在GDB里运行一个程序
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breakpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      设置断点(breakpoints)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      检查程序的状态
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      控制程序执行
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      实用建议
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见问题
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="gdb">gdb快速入门</h1>
+<p>翻译和改编自 <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1186/guide/gdb.html">Stanford CS107 gdb guide</a></p>
+<p>原作者 Nate Hardison, CS107 TA</p>
+<p>GDB是一个功能强大的调试器，可以调试C语言等。它是GNU软件包的一部分，和gcc编译器、emacs编辑器等自由软件一样，在几乎所有的UNIX机器上都有安装。 因此斯坦福的很多计算机课程都使用GDB作为调试器。学着爱上GDB。同那些出bug时不停猜测、写一大堆printf语句的人比起来，熟练使用GDB的人在调试bug的时候要轻松得多。</p>
+<p>这份文档是面向在CS107中使用GDB的一个简短介绍。从这个简短的介绍中掌握基础，当你想了解更多的时候，去看<a href="http://sourceware.org/gdb/current/onlinedocs/gdb/index.html">完整的GDB手册</a>。</p>
+<h3 id="gdb_1">在GDB里运行一个程序</h3>
+<p>GDB 是一个命令行工具，在终端里运行。你需要在一个UNIX环境里运行它（这个UNIX环境可以是一个虚拟机，可以是WSL，也可以在Mac里安装和gdb类似的lldb）。</p>
+<p>GDB把你想调试的可执行文件作为它的参数。不是.c文件或者.o文件， 而是编译后的可执行文件的名字，通常没有扩展名。</p>
+<p>这里我将在数据结构与算法的LAB0里运行GDB。</p>
+<p>首先，在命令行里，<code>cd</code> 到 LAB0的目录下，通过<code>g++ solution_1.cpp -o sol1 -g</code>编译为可执行文件。然后我启动gdb:</p>
+<p><div class="highlight"><pre><span></span><code>gdb sol1
+</code></pre></div>
+这会打印出类似下面的提示信息，并且在一行的开始有一个<code>(gdb)</code>提示符。
+<div class="highlight"><pre><span></span><code>GNU gdb (Ubuntu 9.2-0ubuntu1~20.04.1) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+......(省略)
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from sol1...
+(gdb)
+</code></pre></div>
+在有 <code>(gdb)</code>提示的情况下，命令<code>run</code>会启动程序的运行。如果你想在程序运行时给他什么命令行参数，你要把参数加到<code>run</code> 命令的后面。</p>
+<p>如果我想让程序把输出重定向到<code>1.out</code>,我需要这么做:</p>
+<p><div class="highlight"><pre><span></span><code>(gdb) r sol1 &gt; 1.out
+Starting program: /home/my/path/LAB1/sol1 sol1 &gt; 1.out
+</code></pre></div>
+这会让程序开始运行。等到程序结束的时候，行首的<code>(gdb)</code>提示符又会出现。</p>
+<h3 id="breakpoints">设置断点(breakpoints)</h3>
+<p>通常来说，程序在return退出主函数的时候停止运行。通过断点，你可以让程序的执行在任意时刻挺下来，比如在某个函数调用或者某行代码的地方。断点是一个很重要的工具，通过它你可以在执行到特定场景时，让程序停下来，检查程序的执行状态。</p>
+<p>通过你需要在程序启动之前把断点设置好，使用的命令为<code>break</code>。</p>
+<p>例如，这样做可以在名字叫做main的函数开始时设置断点：</p>
+<div class="highlight"><pre><span></span><code>(gdb) b main
+Breakpoint 1 at 0x555555555189: file solution_1.cpp, line 3.
+</code></pre></div>
+<p>给solution_1.cpp的某一行设置断点:</p>
+<div class="highlight"><pre><span></span><code>(gdb) b solution_1.cpp:10
+Breakpoint 2 at 0x555555555225: file solution_1.cpp, line 11.
+</code></pre></div>
+<p>每次你设置断点时，gdb会给这个断点一个编号。如果你想删除一个断点，使用<code>delete</code>命令。</p>
+<p>例如删除编号为2的断点:</p>
+<div class="highlight"><pre><span></span><code>(gdb) del 2
+</code></pre></div>
+<p>如果你搞不清设置了哪些断点，或者想看一下当前断点的编号都是什么，可以用<code>info break</code>命令查看当前生效的断点。</p>
+<div class="highlight"><pre><span></span><code>(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000555555555189 in main() at solution_1.cpp:3
+2       breakpoint     keep y   0x0000555555555225 in main() at solution_1.cpp:11
+</code></pre></div>
+<p>最后，注意函数名比行号更容易记住，而且在你修改程序的时候行号经常会发生变动，所以理想情况下我们通过函数名来设置断点。如果你将函数分解成小的、紧凑的函数，设置断点会很容易。反过来，在一个50行的函数里找打断点的合适地方会很难受。这也说明为什么要从一开始就保持良好的代码风格。</p>
+<p>接下来的部分会介绍，当你的程序停在一个断点处，或因为触发段错误等原因而暂停运行时，你可以做哪些事情。</p>
+<div class="admonition question">
+<p class="admonition-title">什么是段错误?</p>
+<p>系统报错"segmentation fault"的一类程序运行错误，通常和内存错误有关，如数组越界、访问空指针都可能导致段错误。</p>
+</div>
+<h3 id="_1">检查程序的状态</h3>
+<p><strong>回溯 Backtrace</strong></p>
+<p>GDB最有用的一个功能就是，它能给你看一下当前的函数调用路径（或者说，“函数调用栈”）。这对于定位段错误之类的bug尤其有用。</p>
+<p>如果一个叫做reassemble的程序在一个叫做read_flag的函数里发生了段错误，GDB会打印下面这样的信息:</p>
+<div class="highlight"><pre><span></span><code>Program received signal SIGSEGV, Segmentation fault.
+0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
+51      if (strlen(unusedptr) == MAX_FRAG_LEN)
+</code></pre></div>
+<p>这比不用GDB时的一个“Segmentation Fault”的系统错误信息更有用。你还可以通过 <code>backtrace</code> 命令来获取程序此时的完整函数调用状态。
+<div class="highlight"><pre><span></span><code>(gdb) backtrace
+#0  0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
+#1  0x0000000000400bd7 in read_all_frags (fp=fp@entry=0x603010, arr=arr@entry=0x7fffffff4cb0, maxfrags=maxfrags@entry=5000) at reassemble.c:69
+#2  0x00000000004010ed in main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at reassemble.c:211
+</code></pre></div></p>
+<p>每一行代表一个栈帧(stack frame), 也就是一次函数调用. 栈帧 #0 是错误发生的地方, 对read_frag的调用.十六进制的 0x0000000000400ac1 是导致段错误的指令地址(程序是一长串指令连成的数据,那么里面每一条指令当然有一个地址). 最后,你会看到出错的地方是 reassemble.c 的51行. 如果你要调试这个段错误, 这些都是很有用的信息.</p>
+<p>在调试的时候, 你也很可能想看一下特定变量的取值. <code>print</code> 命令此时很好用.</p>
+<p>如果不了解什么是栈帧，可以参考 <a href="https://tsinghua-dsa.github.io/JumpIntoDSA/C/recursion/">https://tsinghua-dsa.github.io/JumpIntoDSA/C/recursion/</a></p>
+<p><strong>变量和表达式</strong></p>
+<p>为了打印变量的数值:</p>
+<p><div class="highlight"><pre><span></span><code>(gdb) b main
+Breakpoint 1 at 0x1189: file solution_1.cpp, line 3.
+(gdb) r
+Starting program: /home/wsliu/LAB1/sol1 
+
+Breakpoint 1, main () at solution_1.cpp:3
+3       int main(){
+(gdb) p n
+$1 = 32767
+(gdb) p m
+$2 = 1431655277
+(gdb) p q
+$3 = 21845
+</code></pre></div>
+这打印了<code>solution_1.cpp</code>的n,m,q未初始化时的数值.</p>
+<p>你甚至可以通过print来求值表达式, 调用函数, 给变量重新赋值,等等.</p>
+<p>设置变量n的数值为1:</p>
+<div class="highlight"><pre><span></span><code>p n=1
+$4 = 1
+</code></pre></div>
+<p>打印函数调用的返回值:</p>
+<div class="highlight"><pre><span></span><code>(gdb)  p memset(matrix, 10, 0)
+$5 = (void *) 0x555555558040 &lt;matrix&gt;
+</code></pre></div>
+<p>下面的命令可以快速打印一个函数中的较多变量.</p>
+<p><code>info args</code>打印当前函数的所有参数.</p>
+<p>如果当前函数没有参数,打印 "No arguments".
+<div class="highlight"><pre><span></span><code>(gdb) info args
+No arguments.
+</code></pre></div></p>
+<p><code>info locals</code>打印当前函数所有局部变量.
+<div class="highlight"><pre><span></span><code>(gdb) info locals
+n = 32767
+m = 1431655277
+q = 21845
+sum = 1431654560
+(gdb) print n=10
+$1 = 10
+(gdb) info locals
+n = 10
+m = 1431655277
+q = 21845
+sum = 1431654560
+</code></pre></div>
+<strong>栈帧</strong></p>
+<p>当你暂停程序运行时, 除了当前函数, 你有时也需要看一下上层调用它的函数. <code>up</code>和<code>down</code>命令可以用来做这个事情, 在函数调用序列里上下移动.</p>
+<p>up 会让你向上移动一个栈帧 (从被调用的函数移动到调用它的函数), down反之.</p>
+<p>下面的例子先从read_frag向上移动到调用它的read_all_frags, 然后向下移动回read_frag.</p>
+<div class="highlight"><pre><span></span><code>(gdb) up
+#1  0x0000000000400bd7 in read_all_frags (fp=fp@entry=0x603010, arr=arr@entry=0x7fffffff4cb0, maxfrags=maxfrags@entry=5000) at reassemble.c:69
+69          char *frag = read_frag(fp, i);
+(gdb) down
+#0  0x0000000000400ac1 in read_frag (fp=fp@entry=0x603010, nread=nread@entry=0) at reassemble.c:51
+51      if (strlen(unusedptr) == MAX_FRAG_LEN)
+</code></pre></div>
+<p>当发生段错误时, 你常常需要了解调用当前函数的函数的局部变量, 这时up和down会很有用.</p>
+<h3 id="_2">控制程序执行</h3>
+<p><code>run</code>命令可以让程序开始执行,或者在程序停在断点时让程序继续执行. <code>start</code>让程序从头开始执行,并停在main函数开始时.</p>
+<p>当你停在断点时, 你可以选择如何让程序继续执行. <code>continue</code>命令会让程序继续执行到下一个断点或直到程序结束. <code>finish</code>会让当前函数执行完毕并在此处暂停. 你可以用<code>next</code>或<code>step</code>命令来单步执行, 这两个命令都会执行一行代码, 然后暂停一下. 区别在于, 如果这一行有函数调用, <code>next</code>会执行完成这个函数, <code>step</code>会调用函数并暂停在函数里的第一行.</p>
+<h3 id="_3">实用建议</h3>
+<p>大部分gdb命令都可以缩写. 最常见的命令可以只用首字母.(s-step, b-break, c-continue, 等等). 其他命令也可以尽量的缩短(cond-condition) </p>
+<p>你可以在程序执行到任何地方的时候重启,用命令<code>r</code>就可以(gdb会要你确认是否真的想从头开始). 如果你没有输入参数, 它会自动复用上一次使用的参数. (如 &gt; 1.out 之类的参数).</p>
+<p>如果你用Makefile编译, 你可以在GDB里面重新编译, 不需要退出GDB之后重新打断点. 在(gdb)提示符后面敲make命令, 根据正确的Makefile, 就会编译可执行文件. 下一次输入run命令的时候, 就会重新加载新的可执行文件并把已有的断点加进去.</p>
+<h3 id="_4">常见问题</h3>
+<p><strong>尝试启动gdb, 报错"No such file or directory", 怎么办?</strong></p>
+<div class="highlight"><pre><span></span><code>gdb myprogram
+myprogram: No such file or directory.
+(gdb)
+</code></pre></div>
+<p>错误信息表示当前目录里没有找到你指定的名字的可执行文件. 可能原因: 打错了程序名字, 当前在错误的目录下, 忘了编译代码为可执行文件.</p>
+<p><strong>报错no debugging symbols found, 也无法使用函数名和变量名来调试, 怎么办?</strong>
+<div class="highlight"><pre><span></span><code>gdb myprogram
+Reading symbols from myprogram...(no debugging symbols found)...done.
+(gdb)
+</code></pre></div></p>
+<p>错误信息表示, 编译时, 编译器没有加入调试所需的符号, 这是编译选项不合适导致的. 在编译选项里加上<code>-g</code>.</p>
+<p><strong>gdb警告 the source file is more recent, 怎么办</strong></p>
+<div class="highlight"><pre><span></span><code>(gdb) list
+warning: Source file is more recent than executable.
+</code></pre></div>
+<p>这表示你修改了一些代码, 但修改后没有重新编译. gdb 此时无法把当前的可执行文件和代码文件放在一起调试. 退出gdb, 重新编译, 然后再进入gdb.</p>
+<p><strong>尝试给程序传入命令行参数, 但是报错了</strong></p>
+<div class="highlight"><pre><span></span><code>gdb myprogram julie
+Reading symbols from myprogram...done. 
+&quot;julie&quot; is not a core dump: File format not recognized&quot;
+(gdb)
+</code></pre></div>
+<p>程序运行时的命令行参数不应当在启动gdb的时候传入,而应该在 run 命令之后加入. 正确做法是下面这样:</p>
+<div class="highlight"><pre><span></span><code>gdb myprogram
+Reading symbols from myprogram...done.
+(gdb) run julie
+</code></pre></div>
+<p><strong>我单步调试进了一个库函数, gdb说找不到源文件, 怎么办?</strong></p>
+<p><div class="highlight"><pre><span></span><code>(gdb) s
+_IO_new_fopen (filename=0xffffdc9f &quot;samples/input&quot;, mode=0x804939a &quot;r&quot;) at iofopen.c:102
+102 iofopen.c: No such file or directory.
+</code></pre></div>
+step命令通常执行下一行代码, 如果下一行是函数, 会跳到函数里执行函数的下一行代码. 但在库函数里, gdb缺乏必要的源文件来调试. 因此, gdb会表示"No such file". 这是你可以通过 finish 命令来结束当前函数. 或者, 一开始的时候不要用step, 而是用next命令将下一行执行完, 不管是不是一个函数调用, 不去函数里面单步运行.</p>
+<p><strong>我的程序在库函数里段错误了, 怎么办?</strong>
+<div class="highlight"><pre><span></span><code>Program received signal SIGSEGV, Segmentation fault.
+__strcmp_ssse3 () at ../sysdeps/i386/i686/multiarch/strcmp-ssse3.S:232
+232 ../sysdeps/i386/i686/multiarch/strcmp-ssse3.S: No such file or directory.
+</code></pre></div></p>
+<p>有可能是你传给库函数的参数有问题, 例如, 对于需要访问内存的库函数, 你传给他一个空指针, 就会导致内存访问出错. 这里建议你仔细检查一下传给它的参数.</p>
+<p><strong>程序结束的时候, gdb说我的程序是 "inferior"的(中文: 更内部的, 更弱小的), 我冒犯到gdb了吗?</strong>
+<div class="highlight"><pre><span></span><code>[Inferior 1 (process 25178) exited normally]
+                  or
+[Inferior 1 (process 25609) exited with code 01]
+</code></pre></div></p>
+<p>别太在意, gdb将你的程序作为一个子进程运行, 因此是"内部的". "exited normally" 表示程序正常结束, 没有发生段错误或死循环等无法正常退出的情况.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.indexes", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
