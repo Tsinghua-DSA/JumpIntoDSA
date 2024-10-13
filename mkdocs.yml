@@ -40,6 +40,8 @@ nav:
     - Debugging/index.md
     - Debugging/Intro.md
     - Debugging/Style.md
+    - Debugging/Testcase.md
+    - Debugging/Tools.md
   - 补充讲解:
     - Supplement/index.md
 
